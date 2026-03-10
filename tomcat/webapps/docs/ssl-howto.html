@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="./images/docs-stylesheet.css" rel="stylesheet" type="text/css"><title>Apache Tomcat 10 (10.1.52) - SSL/TLS Configuration How-To</title></head><body><div id="wrapper"><header><div id="header"><div><div><div class="logo noPrint"><a href="https://tomcat.apache.org/"><img alt="Tomcat Home" src="./images/tomcat.png"></a></div><div style="height: 1px;"></div><div class="asfLogo noPrint"><a href="https://www.apache.org/" target="_blank"><img src="./images/asf-logo.svg" alt="The Apache Software Foundation" style="width: 266px; height: 83px;"></a></div><h1>Apache Tomcat 10</h1><div class="versionInfo">
-            Version 10.1.52,
-            <time datetime="2026-01-23">Jan 23 2026</time></div><div style="height: 1px;"></div><div style="clear: left;"></div></div></div></div></header><div id="middle"><div><div id="mainLeft" class="noprint"><div><nav><div><h2>Links</h2><ul><li><a href="index.html">Docs Home</a></li><li><a href="https://cwiki.apache.org/confluence/display/TOMCAT/FAQ">FAQ</a></li></ul></div><div><h2>User Guide</h2><ul><li><a href="introduction.html">1) Introduction</a></li><li><a href="setup.html">2) Setup</a></li><li><a href="appdev/index.html">3) First webapp</a></li><li><a href="deployer-howto.html">4) Deployer</a></li><li><a href="manager-howto.html">5) Manager</a></li><li><a href="host-manager-howto.html">6) Host Manager</a></li><li><a href="realm-howto.html">7) Realms and AAA</a></li><li><a href="security-manager-howto.html">8) Security Manager</a></li><li><a href="jndi-resources-howto.html">9) JNDI Resources</a></li><li><a href="jndi-datasource-examples-howto.html">10) JDBC DataSources</a></li><li><a href="class-loader-howto.html">11) Classloading</a></li><li><a href="jasper-howto.html">12) JSPs</a></li><li><a href="ssl-howto.html">13) SSL/TLS</a></li><li><a href="ssi-howto.html">14) SSI</a></li><li><a href="cgi-howto.html">15) CGI</a></li><li><a href="proxy-howto.html">16) Proxy Support</a></li><li><a href="mbeans-descriptors-howto.html">17) MBeans Descriptors</a></li><li><a href="default-servlet.html">18) Default Servlet</a></li><li><a href="cluster-howto.html">19) Clustering</a></li><li><a href="balancer-howto.html">20) Load Balancer</a></li><li><a href="connectors.html">21) Connectors</a></li><li><a href="monitoring.html">22) Monitoring and Management</a></li><li><a href="logging.html">23) Logging</a></li><li><a href="apr.html">24) APR/Native</a></li><li><a href="virtual-hosting-howto.html">25) Virtual Hosting</a></li><li><a href="aio.html">26) Advanced IO</a></li><li><a href="maven-jars.html">27) Mavenized</a></li><li><a href="security-howto.html">28) Security Considerations</a></li><li><a href="windows-service-howto.html">29) Windows Service</a></li><li><a href="windows-auth-howto.html">30) Windows Authentication</a></li><li><a href="jdbc-pool.html">31) Tomcat's JDBC Pool</a></li><li><a href="web-socket-howto.html">32) WebSocket</a></li><li><a href="rewrite.html">33) Rewrite</a></li><li><a href="cdi.html">34) CDI 2 and JAX-RS</a></li><li><a href="graal.html">35) AOT/GraalVM Support</a></li></ul></div><div><h2>Reference</h2><ul><li><a href="RELEASE-NOTES.txt">Release Notes</a></li><li><a href="config/index.html">Configuration</a></li><li><a href="api/index.html">Tomcat Javadocs</a></li><li><a href="servletapi/index.html">Servlet 6.0 Javadocs</a></li><li><a href="jspapi/index.html">JSP 3.1 Javadocs</a></li><li><a href="elapi/index.html">EL 5.0 Javadocs</a></li><li><a href="websocketapi/index.html">WebSocket 2.1 Javadocs</a></li><li><a href="jaspicapi/index.html">Authentication 3.0 Javadocs</a></li><li><a href="annotationapi/index.html">Annotations 2.1 Javadocs</a></li><li><a href="https://tomcat.apache.org/connectors-doc/">JK 1.2 Documentation</a></li></ul></div><div><h2>Apache Tomcat Development</h2><ul><li><a href="building.html">Building</a></li><li><a href="changelog.html">Changelog</a></li><li><a href="https://cwiki.apache.org/confluence/display/TOMCAT/Tomcat+Versions">Status</a></li><li><a href="developers.html">Developers</a></li><li><a href="architecture/index.html">Architecture</a></li><li><a href="tribes/introduction.html">Tribes</a></li></ul></div></nav></div></div><div id="mainRight"><div id="content"><h2>SSL/TLS Configuration How-To</h2><h3 id="Table_of_Contents">Table of Contents</h3><div class="text">
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="./images/docs-stylesheet.css" rel="stylesheet" type="text/css"><title>Apache Tomcat 11 (11.0.18) - SSL/TLS Configuration How-To</title></head><body><div id="wrapper"><header><div id="header"><div><div><div class="logo noPrint"><a href="https://tomcat.apache.org/"><img alt="Tomcat Home" src="./images/tomcat.png"></a></div><div style="height: 1px;"></div><div class="asfLogo noPrint"><a href="https://www.apache.org/" target="_blank"><img src="./images/asf-logo.svg" alt="The Apache Software Foundation" style="width: 266px; height: 83px;"></a></div><h1>Apache Tomcat 11</h1><div class="versionInfo">
+            Version 11.0.18,
+            <time datetime="2026-01-23">Jan 23 2026</time></div><div style="height: 1px;"></div><div style="clear: left;"></div></div></div></div></header><div id="middle"><div><div id="mainLeft" class="noprint"><div><nav><div><h2>Links</h2><ul><li><a href="index.html">Docs Home</a></li><li><a href="https://cwiki.apache.org/confluence/display/TOMCAT/FAQ">FAQ</a></li></ul></div><div><h2>User Guide</h2><ul><li><a href="introduction.html">1) Introduction</a></li><li><a href="setup.html">2) Setup</a></li><li><a href="appdev/index.html">3) First webapp</a></li><li><a href="deployer-howto.html">4) Deployer</a></li><li><a href="manager-howto.html">5) Manager</a></li><li><a href="host-manager-howto.html">6) Host Manager</a></li><li><a href="realm-howto.html">7) Realms and AAA</a></li><li><a href="jndi-resources-howto.html">8) JNDI Resources</a></li><li><a href="jndi-datasource-examples-howto.html">9) JDBC DataSources</a></li><li><a href="class-loader-howto.html">10) Classloading</a></li><li><a href="jasper-howto.html">11) JSPs</a></li><li><a href="ssl-howto.html">12) SSL/TLS</a></li><li><a href="ssi-howto.html">13) SSI</a></li><li><a href="cgi-howto.html">14) CGI</a></li><li><a href="proxy-howto.html">15) Proxy Support</a></li><li><a href="mbeans-descriptors-howto.html">16) MBeans Descriptors</a></li><li><a href="default-servlet.html">17) Default Servlet</a></li><li><a href="cluster-howto.html">18) Clustering</a></li><li><a href="balancer-howto.html">19) Load Balancer</a></li><li><a href="connectors.html">20) Connectors</a></li><li><a href="monitoring.html">21) Monitoring and Management</a></li><li><a href="logging.html">22) Logging</a></li><li><a href="apr.html">23) APR/Native</a></li><li><a href="virtual-hosting-howto.html">24) Virtual Hosting</a></li><li><a href="aio.html">25) Advanced IO</a></li><li><a href="maven-jars.html">26) Mavenized</a></li><li><a href="security-howto.html">27) Security Considerations</a></li><li><a href="windows-service-howto.html">28) Windows Service</a></li><li><a href="windows-auth-howto.html">29) Windows Authentication</a></li><li><a href="jdbc-pool.html">30) Tomcat's JDBC Pool</a></li><li><a href="web-socket-howto.html">31) WebSocket</a></li><li><a href="rewrite.html">32) Rewrite</a></li><li><a href="cdi.html">33) CDI 2 and JAX-RS</a></li><li><a href="graal.html">34) AOT/GraalVM Support</a></li></ul></div><div><h2>Reference</h2><ul><li><a href="RELEASE-NOTES.txt">Release Notes</a></li><li><a href="config/index.html">Configuration</a></li><li><a href="api/index.html">Tomcat Javadocs</a></li><li><a href="servletapi/index.html">Servlet 6.1 Javadocs</a></li><li><a href="jspapi/index.html">JSP 4.0 Javadocs</a></li><li><a href="elapi/index.html">EL 6.0 Javadocs</a></li><li><a href="websocketapi/index.html">WebSocket 2.2 Javadocs</a></li><li><a href="jaspicapi/index.html">Authentication 3.1 Javadocs</a></li><li><a href="annotationapi/index.html">Annotations 3.0 Javadocs</a></li><li><a href="https://tomcat.apache.org/connectors-doc/">JK 1.2 Documentation</a></li></ul></div><div><h2>Apache Tomcat Development</h2><ul><li><a href="building.html">Building</a></li><li><a href="changelog.html">Changelog</a></li><li><a href="https://cwiki.apache.org/confluence/display/TOMCAT/Tomcat+Versions">Status</a></li><li><a href="developers.html">Developers</a></li><li><a href="architecture/index.html">Architecture</a></li><li><a href="tribes/introduction.html">Tribes</a></li></ul></div></nav></div></div><div id="mainRight"><div id="content"><h2>SSL/TLS Configuration How-To</h2><h3 id="Table_of_Contents">Table of Contents</h3><div class="text">
 <ul><li><a href="#Quick_Start">Quick Start</a></li><li><a href="#Introduction_to_SSL">Introduction to SSL/TLS</a></li><li><a href="#SSL_and_Tomcat">SSL/TLS and Tomcat</a></li><li><a href="#Certificates">Certificates</a></li><li><a href="#General_Tips_on_Running_SSL">General Tips on Running SSL</a></li><li><a href="#Configuration">Configuration</a><ol><li><a href="#Prepare_the_Certificate_Keystore">Prepare the Certificate Keystore</a></li><li><a href="#Edit_the_Tomcat_Configuration_File">Edit the Tomcat Configuration File</a></li></ol></li><li><a href="#Installing_a_Certificate_from_a_Certificate_Authority">Installing a Certificate from a Certificate Authority</a><ol><li><a href="#Create_a_local_Certificate_Signing_Request_(CSR)">Create a local Certificate Signing Request (CSR)</a></li><li><a href="#Importing_the_Certificate">Importing the Certificate</a></li></ol></li><li><a href="#Using_OCSP_Certificates">Using OCSP Certificates</a><ol><li><a href="#Generating_OCSP-Enabled_Certificates">Generating OCSP-Enabled Certificates</a></li></ol></li><li><a href="#Troubleshooting">Troubleshooting</a></li><li><a href="#Using_the_SSL_for_session_tracking_in_your_application">Using the SSL for session tracking in your application</a></li><li><a href="#Miscellaneous_Tips_and_Bits">Miscellaneous Tips and Bits</a></li></ul>
 </div><h3 id="Quick_Start">Quick Start</h3><div class="text">
 
@@ -220,10 +220,7 @@ Tomcat can use two different implementations of SSL:
 The exact configuration details depend on which implementation is being used.
 If you configured Connector by specifying generic
 <code>protocol="HTTP/1.1"</code> then the implementation used by Tomcat is
-chosen automatically. If the installation uses <a href="apr.html">APR</a>
-- i.e. you have installed the Tomcat native library -
-then it will use the JSSE OpenSSL implementation, otherwise it will use the Java
-JSSE implementation.
+chosen automatically.
 </p>
 
 <p>
@@ -243,31 +240,35 @@ loaded or not, use one of the following:</p>
            port="8443" .../&gt;</code></pre></div>
 
 <p>The OpenSSL JSSE implementation can also be configured explicitly if needed.
-If the APR library is installed, using the sslImplementationName attribute
-allows enabling it. When using the OpenSSL JSSE implementation, the
+If the Tomcat Native library or Java 22 is installed, using the
+<code>sslImplementationName</code>
+attribute allows enabling it. When using the OpenSSL JSSE implementation, the
 configuration can use either the JSSE attributes or the OpenSSL attributes, but
 must not mix attributes from both types in the same SSLHostConfig or Connector
 element.</p>
+<p>With Tomcat Native:</p>
 <div class="codeBox"><pre><code>&lt;!-- Define an HTTP/1.1 Connector on port 8443, JSSE NIO implementation and OpenSSL --&gt;
 &lt;Connector protocol="org.apache.coyote.http11.Http11NioProtocol" port="8443"
            sslImplementationName="org.apache.tomcat.util.net.openssl.OpenSSLImplementation"
            .../&gt;</code></pre></div>
+<p>With Java 22 FFM API:</p>
+<div class="codeBox"><pre><code>&lt;!-- Define an HTTP/1.1 Connector on port 8443, JSSE NIO implementation and OpenSSL --&gt;
+&lt;Connector protocol="org.apache.coyote.http11.Http11NioProtocol" port="8443"
+           sslImplementationName="org.apache.tomcat.util.net.openssl.panama.OpenSSLImplementation"
+           .../&gt;</code></pre></div>
 
-<p>If you are using JSSE OpenSSL, you have the option of configuring an alternative engine to OpenSSL.</p>
-<div class="codeBox"><pre><code>&lt;Listener className="org.apache.catalina.core.AprLifecycleListener"
-          SSLEngine="someengine" SSLRandomSeed="somedevice" /&gt;</code></pre></div>
-<p>The default value is</p>
-<div class="codeBox"><pre><code>&lt;Listener className="org.apache.catalina.core.AprLifecycleListener"
-          SSLEngine="on" SSLRandomSeed="builtin" /&gt;</code></pre></div>
+<p>Alternately a listener can be added to the <code>Server</code> to enable
+OpenSSL on all connectors without having to add the
+<code>sslImplementationName</code> attribute on each.</p>
+<p>With Tomcat Native:</p>
+<div class="codeBox"><pre><code>&lt;Listener className="org.apache.catalina.core.AprLifecycleListener"/&gt;</code></pre></div>
+<p>With Java 22 FFM API:</p>
+<div class="codeBox"><pre><code>&lt;Listener className="org.apache.catalina.core.OpenSSLLifecycleListener"/&gt;</code></pre></div>
 <p>
-So to enable OpenSSL, make sure the SSLEngine attribute is set to something other than <code>off</code>.
-The default value is <code>on</code> and if you specify another value,
-it has to be a valid OpenSSL engine name.
-</p>
-
-<p>
-SSLRandomSeed allows to specify a source of entropy. Productive system needs a reliable source of entropy
-but entropy may need a lot of time to be collected therefore test systems could use no blocking entropy
+The <code>SSLRandomSeed</code> attribute of the listeners allows specifying a
+source of entropy.
+Productive system needs a reliable source of entropy but entropy may need a lot
+of time to be collected therefore test systems could use no blocking entropy
 sources like "/dev/urandom" that will allow quicker starts of Tomcat.
 </p>
 
@@ -284,9 +285,7 @@ so it looks something like this:</p>
     protocol="org.apache.coyote.http11.Http11NioProtocol"
     port="8443"
     maxThreads="150"
-    SSLEnabled="true"
-    maxParameterCount="1000"
-    &gt;
+    SSLEnabled="true"&gt;
   &lt;SSLHostConfig&gt;
     &lt;Certificate
       certificateKeystoreFile="${user.home}/.keystore"
@@ -296,10 +295,7 @@ so it looks something like this:</p>
     &lt;/SSLHostConfig&gt;
 &lt;/Connector&gt;</code></pre></div>
 <p>
-  Note: If tomcat-native is installed, the configuration will use JSSE with
-  an OpenSSL implementation.</p>
-<p>
-  The APR configuration style uses different attributes for many SSL settings,
+  The OpenSSL configuration style uses different attributes for many SSL settings,
   particularly keys and certificates. An example of an APR configuration style
   is:</p>
 <div class="codeBox"><pre><code>&lt;!-- Define an SSL Coyote HTTP/1.1 Connector on port 8443 --&gt;
@@ -307,9 +303,7 @@ so it looks something like this:</p>
     protocol="org.apache.coyote.http11.Http11NioProtocol"
     port="8443"
     maxThreads="150"
-    SSLEnabled="true"
-    maxParameterCount="1000"
-    &gt;
+    SSLEnabled="true" &gt;
   &lt;SSLHostConfig&gt;
     &lt;Certificate
         certificateKeyFile="conf/localhost-rsa-key.pem"

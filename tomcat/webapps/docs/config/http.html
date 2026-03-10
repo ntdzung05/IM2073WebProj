@@ -1,6 +1,6 @@
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="../images/docs-stylesheet.css" rel="stylesheet" type="text/css"><title>Apache Tomcat 10 Configuration Reference (10.1.52) - The HTTP Connector</title></head><body><div id="wrapper"><header><div id="header"><div><div><div class="logo noPrint"><a href="https://tomcat.apache.org/"><img alt="Tomcat Home" src="../images/tomcat.png"></a></div><div style="height: 1px;"></div><div class="asfLogo noPrint"><a href="https://www.apache.org/" target="_blank"><img src="../images/asf-logo.svg" alt="The Apache Software Foundation" style="width: 266px; height: 83px;"></a></div><h1>Apache Tomcat 10 Configuration Reference</h1><div class="versionInfo">
-            Version 10.1.52,
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="../images/docs-stylesheet.css" rel="stylesheet" type="text/css"><title>Apache Tomcat 11 Configuration Reference (11.0.18) - The HTTP Connector</title></head><body><div id="wrapper"><header><div id="header"><div><div><div class="logo noPrint"><a href="https://tomcat.apache.org/"><img alt="Tomcat Home" src="../images/tomcat.png"></a></div><div style="height: 1px;"></div><div class="asfLogo noPrint"><a href="https://www.apache.org/" target="_blank"><img src="../images/asf-logo.svg" alt="The Apache Software Foundation" style="width: 266px; height: 83px;"></a></div><h1>Apache Tomcat 11 Configuration Reference</h1><div class="versionInfo">
+            Version 11.0.18,
             <time datetime="2026-01-23">Jan 23 2026</time></div><div style="height: 1px;"></div><div style="clear: left;"></div></div></div></div></header><div id="middle"><div><div id="mainLeft" class="noprint"><div><nav><div><h2>Links</h2><ul><li><a href="../index.html">Docs Home</a></li><li><a href="index.html">Config Ref. Home</a></li><li><a href="https://cwiki.apache.org/confluence/display/TOMCAT/FAQ">FAQ</a></li><li><a href="#comments_section">User Comments</a></li></ul></div><div><h2>Top Level Elements</h2><ul><li><a href="server.html">Server</a></li><li><a href="service.html">Service</a></li></ul></div><div><h2>Executors</h2><ul><li><a href="executor.html">Executor</a></li></ul></div><div><h2>Connectors</h2><ul><li><a href="http.html">HTTP/1.1</a></li><li><a href="http2.html">HTTP/2</a></li><li><a href="ajp.html">AJP</a></li></ul></div><div><h2>Containers</h2><ul><li><a href="context.html">Context</a></li><li><a href="engine.html">Engine</a></li><li><a href="host.html">Host</a></li><li><a href="cluster.html">Cluster</a></li></ul></div><div><h2>Nested Components</h2><ul><li><a href="cookie-processor.html">CookieProcessor</a></li><li><a href="credentialhandler.html">CredentialHandler</a></li><li><a href="globalresources.html">Global Resources</a></li><li><a href="jar-scanner.html">JarScanner</a></li><li><a href="jar-scan-filter.html">JarScanFilter</a></li><li><a href="listeners.html">Listeners</a></li><li><a href="loader.html">Loader</a></li><li><a href="manager.html">Manager</a></li><li><a href="realm.html">Realm</a></li><li><a href="resources.html">Resources</a></li><li><a href="sessionidgenerator.html">SessionIdGenerator</a></li><li><a href="valve.html">Valve</a></li></ul></div><div><h2>Cluster Elements</h2><ul><li><a href="cluster.html">Cluster</a></li><li><a href="cluster-manager.html">Manager</a></li><li><a href="cluster-channel.html">Channel</a></li><li><a href="cluster-membership.html">Channel/Membership</a></li><li><a href="cluster-sender.html">Channel/Sender</a></li><li><a href="cluster-receiver.html">Channel/Receiver</a></li><li><a href="cluster-interceptor.html">Channel/Interceptor</a></li><li><a href="cluster-valve.html">Valve</a></li><li><a href="cluster-deployer.html">Deployer</a></li><li><a href="cluster-listener.html">ClusterListener</a></li></ul></div><div><h2>web.xml</h2><ul><li><a href="filter.html">Filter</a></li></ul></div><div><h2>Other</h2><ul><li><a href="runtime-attributes.html">Runtime attributes</a></li><li><a href="systemprops.html">System properties</a></li><li><a href="jaspic.html">Jakarta Authentication</a></li></ul></div></nav></div></div><div id="mainRight"><div id="content"><h2>The HTTP Connector</h2><h3 id="Table_of_Contents">Table of Contents</h3><div class="text">
 <ul><li><a href="#Introduction">Introduction</a></li><li><a href="#Attributes">Attributes</a><ol><li><a href="#Common_Attributes">Common Attributes</a></li><li><a href="#Standard_Implementation">Standard Implementation</a></li><li><a href="#Java_TCP_socket_attributes">Java TCP socket attributes</a></li><li><a href="#NIO_specific_configuration">NIO specific configuration</a></li><li><a href="#NIO2_specific_configuration">NIO2 specific configuration</a></li></ol></li><li><a href="#Nested_Components">Nested Components</a></li><li><a href="#Special_Features">Special Features</a><ol><li><a href="#HTTP/1.1_and_HTTP/1.0_Support">HTTP/1.1 and HTTP/1.0 Support</a></li><li><a href="#HTTP/2_Support">HTTP/2 Support</a></li><li><a href="#Proxy_Support">Proxy Support</a></li><li><a href="#Unix_Domain_Socket_Support">Unix Domain Socket Support</a></li><li><a href="#SSL_Support">SSL Support</a></li><li><a href="#SSL_Support_-_SSLHostConfig">SSL Support - SSLHostConfig</a></li><li><a href="#SSL_Support_-_Certificate">SSL Support - Certificate</a></li><li><a href="#SSL_Support_-_Connector_-_NIO_and_NIO2">SSL Support - Connector - NIO and NIO2</a></li><li><a href="#SSL_Support_-_OpenSSL's_SSL_CONF_API">SSL Support - OpenSSL's SSL_CONF API</a></li><li><a href="#Key_store_types">Key store types</a></li><li><a href="#Connector_Comparison">Connector Comparison</a></li></ol></li></ul>
 </div><h3 id="Introduction">Introduction</h3><div class="text">
@@ -65,8 +65,7 @@
       of the facade objects that isolate the container internal request
       processing objects. If set to <code>true</code> the facades will be
       set for garbage collection after every request, otherwise they will be
-      reused. This setting has no effect when the security manager is enabled.
-      If not specified, this attribute is set to <code>true</code>.</p>
+      reused. If not specified, this attribute is set to <code>true</code>.</p>
     </td></tr><tr id="Attributes_Common Attributes_enableLookups"><td><code class="attributeName">enableLookups</code></td><td>
       <p>Set to <code>true</code> if you want calls to
       <code>request.getRemoteHost()</code> to perform DNS lookups in
@@ -127,20 +126,15 @@
       files) obtained from the query string and, for POST requests, the request
       body if the content type is
       <code>application/x-www-form-urlencoded</code> or
-      <code>multipart/form-data</code>. Request parameters beyond this limit
-      will be ignored. A value of less than 0 means no limit. If not specified,
-      a default of 10000 is used. The <code>FailedRequestFilter</code>
-      <a href="filter.html">filter</a> can be used to reject requests that
-      exceed the limit.</p>
+      <code>multipart/form-data</code>. Requests that exceed this limit will be
+      rejected. A value of less than 0 means no limit. If not specified, a
+      default of 1000 is used.</p>
     </td></tr><tr id="Attributes_Common Attributes_maxPartCount"><td><code class="attributeName">maxPartCount</code></td><td>
       <p>The maximum total number of parts permitted in a request where the
       content type is <code>multipart/form-data</code>. This limit is in
-      addition to <code>maxParameterCount</code>. A value of less than 0 means
-      no limit. If not specified, a default of 50 is used. Requests that exceed
-      this limit may be ignored depending on how the application processes the
-      request. The <code>FailedRequestFilter</code>
-      <a href="filter.html">filter</a> can be used to always reject requests
-      that exceed the limit.</p>
+      addition to <code>maxParameterCount</code>. Requests that exceed this
+      limit will be rejected. A value of less than 0 means no limit. If not
+      specified, a default of 50 is used.</p>
       <p>The nature of multipart requests and the associated Servlet API
       requirements for processing them is such that they can place a significant
       demand on memory. Applications utilising multipart requests need to ensure
@@ -166,10 +160,8 @@
       used to generate the parameters that are made available through the
       <code>getParameter()</code> family of methods.</p>
       <p>The limit can be disabled by setting this attribute to a value less
-      than zero. If not specified, this attribute is set to 2097152 (2 MiB).
-      Note that the
-      <a href="filter.html#Failed_Request_Filter"><code>FailedRequestFilter</code></a>
-      can be used to reject requests that exceed this limit.</p>
+      than zero. Requests that exceed this limit will be rejected. If not
+      specified, this attribute is set to 2097152 (2 MiB).</p>
     </td></tr><tr id="Attributes_Common Attributes_maxSavePostSize"><td><code class="attributeName">maxSavePostSize</code></td><td>
       <p>The maximum size in bytes of the request body which will be
       saved/buffered by the container during FORM or CLIENT-CERT authentication
@@ -320,14 +312,6 @@
       configured otherwise using system properties, the Java based connectors
       (NIO, NIO2) will listen on both IPv4 and IPv6 addresses when configured
       with either <code>0.0.0.0</code> or <code>::</code>.</p>
-    </td></tr><tr id="Attributes_Standard Implementation_allowHostHeaderMismatch"><td><code class="attributeName">allowHostHeaderMismatch</code></td><td>
-      <p>By default Tomcat will reject requests that specify a host in the
-      request line but specify a different host in the host header. This
-      check can be disabled by setting this attribute to <code>true</code>. If
-      not specified, the default is <code>false</code>.
-      <br>
-      This setting will be removed in Tomcat 11 onwards where it will be
-      hard-coded to <code>false</code>.</p>
     </td></tr><tr id="Attributes_Standard Implementation_allowedTrailerHeaders"><td><code class="attributeName">allowedTrailerHeaders</code></td><td>
       <p>By default Tomcat will ignore all trailer headers when processing
       chunked input. For a header to be processed, it must be added to this
@@ -548,15 +532,6 @@
       asynchronous processing, an appropriate value is to use the larger
       of maxThreads and the maximum number of expected concurrent requests
       (synchronous and asynchronous).</p>
-    </td></tr><tr id="Attributes_Standard Implementation_rejectIllegalHeader"><td><code class="attributeName">rejectIllegalHeader</code></td><td>
-      <p>If an HTTP request is received that contains an illegal header name or
-      value (e.g. the header name is not a token) this setting determines if the
-      request will be rejected with a 400 response (<code>true</code>) or if the
-      illegal header be ignored (<code>false</code>). The default value is
-      <code>true</code> which will cause the request to be rejected.
-      <br>
-      This setting will be removed in Tomcat 11 onwards where it will be
-      hard-coded to <code>true</code>.</p>
     </td></tr><tr id="Attributes_Standard Implementation_relaxedPathChars"><td><code class="attributeName">relaxedPathChars</code></td><td>
       <p>The <a href="https://tools.ietf.org/rfc/rfc7230.txt">HTTP/1.1
       specification</a> requires that certain characters are %nn encoded when
@@ -704,17 +679,17 @@
         <strong>connectionTimeout</strong>.</p>
       </td></tr><tr id="Attributes_Java TCP socket attributes_socket.performanceConnectionTime"><td><code class="attributeName">socket.performanceConnectionTime</code></td><td>
         <p>(int)The first value for the performance settings. See
-        <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/Socket.html#setPerformancePreferences(int,int,int)">Socket Performance Options</a>.
+        <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/Socket.html#setPerformancePreferences(int,int,int)">Socket Performance Options</a>.
         All three performance attributes must be set else the JVM defaults will
         be used for all three.</p>
       </td></tr><tr id="Attributes_Java TCP socket attributes_socket.performanceLatency"><td><code class="attributeName">socket.performanceLatency</code></td><td>
         <p>(int)The second value for the performance settings. See
-        <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/Socket.html#setPerformancePreferences(int,int,int)">Socket Performance Options</a>.
+        <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/Socket.html#setPerformancePreferences(int,int,int)">Socket Performance Options</a>.
         All three performance attributes must be set else the JVM defaults will
         be used for all three.</p>
       </td></tr><tr id="Attributes_Java TCP socket attributes_socket.performanceBandwidth"><td><code class="attributeName">socket.performanceBandwidth</code></td><td>
         <p>(int)The third value for the performance settings. See
-        <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/Socket.html#setPerformancePreferences(int,int,int)">Socket Performance Options</a>.
+        <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/Socket.html#setPerformancePreferences(int,int,int)">Socket Performance Options</a>.
         All three performance attributes must be set else the JVM defaults will
         be used for all three.</p>
       </td></tr><tr id="Attributes_Java TCP socket attributes_socket.unlockTimeout"><td><code class="attributeName">socket.unlockTimeout</code></td><td>
@@ -1033,7 +1008,7 @@
   attributes to the values <code>https</code> and <code>true</code>
   respectively, to pass correct information to the servlets.</p>
 
-  <p>The NIO and NIO2 connectors may be configured to use either a JSSE Java SSL
+  <p>The NIO and NIO2 connectors may be configured to use either the JSSE Java SSL
   implementation or an OpenSSL implementation. As far as possible, common
   configuration attributes are used for both JSSE and OpenSSL. For each
   Connector, you must use a consistent configuration style (JSSE specific
@@ -1063,7 +1038,7 @@
 
   <p>In addition to the standard TLS related request attributes defined in
   section 3.10 of the Servlet specification, Tomcat supports a number of
-  additional TLS related attributes. The full list may be found in the <a href="http://tomcat.apache.org/tomcat-10.1-doc/api/index.html">SSLSupport
+  additional TLS related attributes. The full list may be found in the <a href="http://tomcat.apache.org/tomcat-11.0-doc/api/index.html">SSLSupport
   Javadoc</a>.</p>
 
   <p>For more information, see the
@@ -1452,6 +1427,10 @@
   implementation depending on the processor being used,
   and can be complemented with many commercial accelerator components.</p>
 
+  <p>When OpenSSL FFM support is enabled, the connectors will default to using
+  OpenSSL through JSSE, which is equivalent but uses the Java FFM API from
+  Java 22 to access OpenSSL.</p>
+
   <p>The following NIO and NIO2 SSL configuration attributes are not specific to
   a virtual host and, therefore, must be configured on the connector.</p>
 
@@ -1481,6 +1460,9 @@
       will automatically enable it and the default value of this attribute
       becomes
       <code>org.apache.tomcat.util.net.openssl.OpenSSLImplementation</code>.
+      The FFM API from Java 22 may also be used to enable OpenSSL support, in
+      which case the default value of the attribute becomes
+      <code>org.apache.tomcat.util.net.openssl.panama.OpenSSLImplementation</code>.
       In that case, the attributes from either JSSE and OpenSSL
       configuration styles can be used, as long as the two types are not mixed
       (for example, it is not allowed to define use of a Java keystore and

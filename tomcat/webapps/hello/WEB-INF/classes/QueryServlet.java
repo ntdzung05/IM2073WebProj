@@ -1,12 +1,8 @@
-// To save as "<TOMCAT_HOME>\webapps\hello\WEB-INF\classes\QueryServlet.java".
 import java.io.*;
 import java.sql.*;
 import jakarta.servlet.*;             // Tomcat 10
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-//import javax.servlet.*;             // Tomcat 9
-//import javax.servlet.http.*;
-//import javax.servlet.annotation.*;
 
 @WebServlet("/query")   // Configure the request URL for this servlet (Tomcat 7/Servlet 3.0 upwards)
 public class QueryServlet extends HttpServlet {
@@ -34,7 +30,7 @@ public class QueryServlet extends HttpServlet {
          // Step 1: Allocate a database 'Connection' object
          Connection conn = DriverManager.getConnection(
                "jdbc:mysql://localhost:3306/ebookshop?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
-               "myuser", "2345");   // For MySQL
+               "myuser", "191006");   // For MySQL
                // The format is: "jdbc:mysql://hostname:port/databaseName", "username", "password"
 
          // Step 2: Allocate a 'Statement' object in the Connection

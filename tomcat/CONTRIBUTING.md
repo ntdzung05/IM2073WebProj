@@ -152,7 +152,7 @@ Apache Tomcat has very loosely defined coding conventions, but the following
 guidelines will be useful:
 
 * Use spaces for indenting, not tabs
-* 100 char line width for Java source, 80 char line width for documentation
+* 120 char line width for Java source, 80 char line width for documentation
 source (.txt, .xml)
 * Java source: { at end of line, 4 space indents
 * XML source: 2 space indents

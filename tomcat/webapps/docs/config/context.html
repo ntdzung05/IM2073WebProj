@@ -1,6 +1,6 @@
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="../images/docs-stylesheet.css" rel="stylesheet" type="text/css"><title>Apache Tomcat 10 Configuration Reference (10.1.52) - The Context Container</title></head><body><div id="wrapper"><header><div id="header"><div><div><div class="logo noPrint"><a href="https://tomcat.apache.org/"><img alt="Tomcat Home" src="../images/tomcat.png"></a></div><div style="height: 1px;"></div><div class="asfLogo noPrint"><a href="https://www.apache.org/" target="_blank"><img src="../images/asf-logo.svg" alt="The Apache Software Foundation" style="width: 266px; height: 83px;"></a></div><h1>Apache Tomcat 10 Configuration Reference</h1><div class="versionInfo">
-            Version 10.1.52,
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="../images/docs-stylesheet.css" rel="stylesheet" type="text/css"><title>Apache Tomcat 11 Configuration Reference (11.0.18) - The Context Container</title></head><body><div id="wrapper"><header><div id="header"><div><div><div class="logo noPrint"><a href="https://tomcat.apache.org/"><img alt="Tomcat Home" src="../images/tomcat.png"></a></div><div style="height: 1px;"></div><div class="asfLogo noPrint"><a href="https://www.apache.org/" target="_blank"><img src="../images/asf-logo.svg" alt="The Apache Software Foundation" style="width: 266px; height: 83px;"></a></div><h1>Apache Tomcat 11 Configuration Reference</h1><div class="versionInfo">
+            Version 11.0.18,
             <time datetime="2026-01-23">Jan 23 2026</time></div><div style="height: 1px;"></div><div style="clear: left;"></div></div></div></div></header><div id="middle"><div><div id="mainLeft" class="noprint"><div><nav><div><h2>Links</h2><ul><li><a href="../index.html">Docs Home</a></li><li><a href="index.html">Config Ref. Home</a></li><li><a href="https://cwiki.apache.org/confluence/display/TOMCAT/FAQ">FAQ</a></li><li><a href="#comments_section">User Comments</a></li></ul></div><div><h2>Top Level Elements</h2><ul><li><a href="server.html">Server</a></li><li><a href="service.html">Service</a></li></ul></div><div><h2>Executors</h2><ul><li><a href="executor.html">Executor</a></li></ul></div><div><h2>Connectors</h2><ul><li><a href="http.html">HTTP/1.1</a></li><li><a href="http2.html">HTTP/2</a></li><li><a href="ajp.html">AJP</a></li></ul></div><div><h2>Containers</h2><ul><li><a href="context.html">Context</a></li><li><a href="engine.html">Engine</a></li><li><a href="host.html">Host</a></li><li><a href="cluster.html">Cluster</a></li></ul></div><div><h2>Nested Components</h2><ul><li><a href="cookie-processor.html">CookieProcessor</a></li><li><a href="credentialhandler.html">CredentialHandler</a></li><li><a href="globalresources.html">Global Resources</a></li><li><a href="jar-scanner.html">JarScanner</a></li><li><a href="jar-scan-filter.html">JarScanFilter</a></li><li><a href="listeners.html">Listeners</a></li><li><a href="loader.html">Loader</a></li><li><a href="manager.html">Manager</a></li><li><a href="realm.html">Realm</a></li><li><a href="resources.html">Resources</a></li><li><a href="sessionidgenerator.html">SessionIdGenerator</a></li><li><a href="valve.html">Valve</a></li></ul></div><div><h2>Cluster Elements</h2><ul><li><a href="cluster.html">Cluster</a></li><li><a href="cluster-manager.html">Manager</a></li><li><a href="cluster-channel.html">Channel</a></li><li><a href="cluster-membership.html">Channel/Membership</a></li><li><a href="cluster-sender.html">Channel/Sender</a></li><li><a href="cluster-receiver.html">Channel/Receiver</a></li><li><a href="cluster-interceptor.html">Channel/Interceptor</a></li><li><a href="cluster-valve.html">Valve</a></li><li><a href="cluster-deployer.html">Deployer</a></li><li><a href="cluster-listener.html">ClusterListener</a></li></ul></div><div><h2>web.xml</h2><ul><li><a href="filter.html">Filter</a></li></ul></div><div><h2>Other</h2><ul><li><a href="runtime-attributes.html">Runtime attributes</a></li><li><a href="systemprops.html">System properties</a></li><li><a href="jaspic.html">Jakarta Authentication</a></li></ul></div></nav></div></div><div id="mainRight"><div id="content"><h2>The Context Container</h2><h3 id="Table_of_Contents">Table of Contents</h3><div class="text">
 <ul><li><a href="#Introduction">Introduction</a><ol><li><a href="#Parallel_deployment">Parallel deployment</a></li><li><a href="#Naming">Naming</a></li><li><a href="#Defining_a_context">Defining a context</a></li></ol></li><li><a href="#Attributes">Attributes</a><ol><li><a href="#Common_Attributes">Common Attributes</a></li><li><a href="#Standard_Implementation">Standard Implementation</a></li></ol></li><li><a href="#Nested_Components">Nested Components</a></li><li><a href="#Special_Features">Special Features</a><ol><li><a href="#Logging">Logging</a></li><li><a href="#Access_Logs">Access Logs</a></li><li><a href="#Automatic_Context_Configuration">Automatic Context Configuration</a></li><li><a href="#Context_Parameters">Context Parameters</a></li><li><a href="#Environment_Entries">Environment Entries</a></li><li><a href="#Lifecycle_Listeners">Lifecycle Listeners</a></li><li><a href="#Request_Filters">Request Filters</a></li><li><a href="#Resource_Definitions">Resource Definitions</a></li><li><a href="#Resource_Links">Resource Links</a></li><li><a href="#Transaction">Transaction</a></li></ol></li></ul>
 </div><h3 id="Introduction">Introduction</h3><div class="text">
@@ -405,6 +405,11 @@
         ServletRequestListeners to configure the necessary environment for a
         request. If not specified, the default value of <code>false</code> is
         used.</p>
+      </td></tr><tr id="Attributes_Common Attributes_ignoreAnnotations"><td><code class="attributeName">ignoreAnnotations</code></td><td>
+        <p>Set to <code>true</code> to have Tomcat ignore all annotations
+        present on classes.</p>
+        <p>If not specified, the default value of <code>false</code> is
+        used.</p>
       </td></tr><tr id="Attributes_Common Attributes_logEffectiveWebXml"><td><code class="attributeName">logEffectiveWebXml</code></td><td>
         <p>Set to <code>true</code> if you want the effective web.xml used for a
         web application to be logged (at INFO level) when the application
@@ -557,7 +562,7 @@
         <p>If the value of this flag is <code>true</code>, Catalina will
         suspend wrapped responses after a forward, instead of closing them.
         If not specified, the default value of the flag is
-        <code>false</code>.</p>
+        <code>true</code>.</p>
       </td></tr><tr id="Attributes_Common Attributes_swallowAbortedUploads"><td><code class="attributeName">swallowAbortedUploads</code></td><td>
         <p>Set to <code>false</code> if Tomcat should <b>not</b> read any
         additional request body data for aborted uploads and instead abort the
@@ -595,14 +600,6 @@
         <code>true</code>, else the default value will be <code>false</code>.
         Setting this attribute to <code>true</code> will incur a performance
         penalty.</p>
-      </td></tr><tr id="Attributes_Common Attributes_useBloomFilterForArchives"><td><code class="attributeName">useBloomFilterForArchives</code></td><td>
-        <p>DEPRECATED: If this is <code>true</code> then a bloom filter will be
-        used to speed up archive lookups. This can be beneficial to the deployment
-        speed to web applications that contain very large amount of JARs.</p>
-        <p>If not specified, the default value of <code>false</code> will be
-        used.</p>
-        <p>This value can be overridden by archiveIndexStrategy in
-        <a href="resources.html">Resources</a></p>
       </td></tr><tr id="Attributes_Common Attributes_useHttpOnly"><td><code class="attributeName">useHttpOnly</code></td><td>
        <p>Should the HttpOnly flag be set on session cookies to prevent client
           side script from accessing the session ID? Defaults to
@@ -734,19 +731,6 @@
         keep-alive timer thread will stop on its own once the keep-alives all
         expire however, on a busy system that might not happen for some time. If
         not specified, the default value of <code>true</code> will be used.</p>
-      </td></tr><tr id="Attributes_Standard Implementation_clearReferencesObjectStreamClassCaches"><td><code class="attributeName">clearReferencesObjectStreamClassCaches</code></td><td>
-        <p>If <code>true</code>, when the web application is stopped Tomcat
-        looks for <code>SoftReference</code>s to classes loaded by the web
-        application in the <code>ObjectStreamClass</code> class used for
-        serialization and clears any <code>SoftReference</code>s it finds. This
-        feature uses reflection to identify the <code>SoftReference</code>s and
-        therefore requires that the command line option
-        <code>-XaddExports:java.base/java.io=ALL-UNNAMED</code> is set. If not
-        specified, the default value of <code>true</code> will be used.</p>
-        <p>The memory leak associated with <code>ObjectStreamClass</code> has
-        been fixed in Java 19 onwards, Java 17.0.4 onwards and Java 11.0.16
-        onwards. The check will be disabled when running on a version
-        of Java that contains the fix.</p>
       </td></tr><tr id="Attributes_Standard Implementation_clearReferencesRmiTargets"><td><code class="attributeName">clearReferencesRmiTargets</code></td><td>
         <p>If <code>true</code>, Tomcat looks for memory leaks associated with
         RMI Targets and clears any it finds. This feature uses reflection to
@@ -1256,8 +1240,8 @@
        two additional attributes to allow a shared data source to be used with different credentials.
        When these two additional attributes are used in combination with the <code>javax.sql.DataSource</code>
        type, different contexts can share a global data source with different credentials.
-       Under the hood, what happens is that a call to <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/javax/sql/DataSource.html#getConnection()"><code>getConnection()</code></a>
-       is simply translated to a call <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/javax/sql/DataSource.html#getConnection(java.lang.String,java.lang.String)">
+       Under the hood, what happens is that a call to <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/javax/sql/DataSource.html#getConnection())"><code>getConnection()</code></a>
+       is simply translated to a call <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/javax/sql/DataSource.html#getConnection(java.lang.String,java.lang.String)">
        <code>getConnection(username, password)</code></a> on the global data source. This is an easy way to get code to be transparent to what schemas are being used,
        yet be able to control connections (or pools) in the global configuration.
     </p>

@@ -1,12 +1,9 @@
-// To save as "<TOMCAT_HOME>\webapps\hello\WEB-INF\classes\QueryServlet.java".
 import java.io.*;
 import java.sql.*;
-import jakarta.servlet.*;             // Tomcat 10
+import jakarta.servlet.*;            // Tomcat 10 (Jakarta EE 9)
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-//import javax.servlet.*;             // Tomcat 9
-//import javax.servlet.http.*;
-//import javax.servlet.annotation.*;
+
 
 @WebServlet("/querymp")   // Configure the request URL for this servlet (Tomcat 7/Servlet 3.0 upwards)
 public class QueryMultiParamServlet extends HttpServlet {
@@ -17,34 +14,31 @@ public class QueryMultiParamServlet extends HttpServlet {
                throws ServletException, IOException {
       // Set the MIME type for the response message
       response.setContentType("text/html");
-      // Get an output writer to write the response message into the network socket
+      // Get a output writer to write the response message into the network socket
       PrintWriter out = response.getWriter();
-
       // Print an HTML page as the output of the query
-      out.println("""
-         <!DOCTYPE html>
-         <html>
-         <head>
-           <title>Query Response</title>
-         </head>
-         <body>
-         """);   // using triple-quoted multi-line String
-         
+      out.println("<!DOCTYPE html>");
+      out.println("<html>");
+      out.println("<head><title>Query Response</title></head>");
+      out.println("<body>");
+
       try (
          // Step 1: Allocate a database 'Connection' object
          Connection conn = DriverManager.getConnection(
                "jdbc:mysql://localhost:3306/ebookshop?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
-               "myuser", "2345");   // For MySQL
+               "myuser", "191006");   // For MySQL
                // The format is: "jdbc:mysql://hostname:port/databaseName", "username", "password"
 
          // Step 2: Allocate a 'Statement' object in the Connection
          Statement stmt = conn.createStatement();
       ) {
          // Step 3: Execute a SQL SELECT query
+         // === Form the SQL command - BEGIN ===
          String sqlStr = "SELECT * FROM books WHERE author = "
                + "'" + request.getParameter("author") + "'"
                + " AND price < " + request.getParameter("price")
                + " AND qty > 0 ORDER BY author ASC, title ASC";
+         // === Form the SQL command - END ===
 
          out.println("<h3>Thank you for your query.</h3>");
          out.println("<p>Your SQL statement is: " + sqlStr + "</p>"); // Echo for debugging
@@ -60,8 +54,9 @@ public class QueryMultiParamServlet extends HttpServlet {
             count++;
          }
          out.println("<p>==== " + count + " records found =====</p>");
+         // === Step 4 ends HERE - Do NOT delete the following codes ===
       } catch(SQLException ex) {
-         out.println("<p>Error: " + ex.getMessage() + "</p>");  // for debugging
+         out.println("<p>Error: " + ex.getMessage() + "</p>");
          out.println("<p>Check Tomcat console for details.</p>");
          ex.printStackTrace();
       }  // Step 5: Close conn and stmt - Done automatically by try-with-resources (JDK 7)
