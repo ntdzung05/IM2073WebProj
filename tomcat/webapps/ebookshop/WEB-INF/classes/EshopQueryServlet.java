@@ -5,8 +5,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 
-@WebServlet("/querymv")   // Configure the request URL for this servlet (Tomcat 7/Servlet 3.0 upwards)
-public class QueryMultiValueServlet extends HttpServlet {
+@WebServlet("/eshopquery")   // Configure the request URL for this servlet (Tomcat 7/Servlet 3.0 upwards)
+public class EshopQueryServlet extends HttpServlet {
 
    // The doGet() runs once per HTTP GET request to this servlet.
    @Override
@@ -26,7 +26,7 @@ public class QueryMultiValueServlet extends HttpServlet {
          // Step 1: Allocate a database 'Connection' object
          Connection conn = DriverManager.getConnection(
                "jdbc:mysql://localhost:3306/ebookshop?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
-               "myuser", "191006");   // For MySQL
+               "myuser", "1234");   // For MySQL
                // The format is: "jdbc:mysql://hostname:port/databaseName", "username", "password"
 
          // Step 2: Allocate a 'Statement' object in the Connection
