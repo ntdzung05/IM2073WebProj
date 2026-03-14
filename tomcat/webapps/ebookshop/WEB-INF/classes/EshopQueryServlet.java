@@ -55,13 +55,21 @@ public class EshopQueryServlet extends HttpServlet {
          out.println("<form method='get' action='eshoporder'>");
          
          // For each row in ResultSet, print one checkbox inside the <form>
+         String table = (" <style>\r\n" + //
+                        "  table, th, td {\r\n" + //
+                        "    border: 1px solid black;\r\n" + //
+                        "  }\r\n" + //
+                        "</style><table><tr><th></th><th>Author</th><th>Title</th><th>Price</th></tr>");
          while(rset.next()) {
-            out.println("<p><input type='checkbox' name='id' value="
-                  + "'" + rset.getString("id") + "' />"
-                  + rset.getString("author") + ", "
-                  + rset.getString("title") + ", $"
-                  + rset.getString("price") + "</p>");
+            table = table + ("<tr><td><input type='checkbox' name='id' value="
+                  + "'" + rset.getString("id") + "' /></td>"
+                  + "<td>" + rset.getString("author") + "</td>"
+                  + "<td>" + rset.getString("title") + "</td>"
+                  + "<td>$" + rset.getString("price") + "</td>"
+                  + "</tr>");
          }
+         table = table + "</table>";
+         out.println(table);
          // get the customer's name, email and phone number
          out.println("""
             <p>Enter your Name: <input type='text' name='cust_name' /></p>
