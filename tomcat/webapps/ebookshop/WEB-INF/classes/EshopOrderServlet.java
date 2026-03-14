@@ -35,6 +35,9 @@ public class EshopOrderServlet extends HttpServlet {
          // Step 3 & 4: Execute a SQL SELECT query and Process the query result
          // Retrieve the books' id. Can order more than one books.
          String[] ids = request.getParameterValues("id");
+         String cust_name = request.getParameter("cust_name");
+         String cust_email = request.getParameter("cust_email");
+         String cust_phone = request.getParameter("cust_phone");
          if (ids != null) {
             String sqlStr;
             int count;
@@ -48,8 +51,8 @@ public class EshopOrderServlet extends HttpServlet {
                out.println("<p>" + count + " record updated.</p>");
  
                // Create a transaction record
-               sqlStr = "INSERT INTO order_records (id, qty_ordered) VALUES ("
-                     + ids[i] + ", 1)";
+               sqlStr = "INSERT INTO order_records (id, qty_ordered, cust_name, cust_email, cust_phone) VALUES ("
+                     + ids[i] + ", 1, '" + cust_name + "', '" + cust_email + "', '" + cust_phone + "')";
                out.println("<p>" + sqlStr + "</p>");  // for debugging
                count = stmt.executeUpdate(sqlStr);
                out.println("<p>" + count + " record inserted.</p>");

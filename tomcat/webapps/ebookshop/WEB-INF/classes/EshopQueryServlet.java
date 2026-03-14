@@ -62,7 +62,13 @@ public class EshopQueryServlet extends HttpServlet {
                   + rset.getString("title") + ", $"
                   + rset.getString("price") + "</p>");
          }
- 
+         // get the customer's name, email and phone number
+         out.println("""
+            <p>Enter your Name: <input type='text' name='cust_name' /></p>
+            <p>Enter your Email: <input type='text' name='cust_email' /></p>
+            <p>Enter your Phone Number: <input type='text' name='cust_phone' /></p>
+         """);
+         
          // Print the submit button and </form> end-tag
          out.println("<p><input type='submit' value='ORDER' />");
          out.println("</form>");
