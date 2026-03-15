@@ -35,6 +35,10 @@ public class EshopAuthorList extends HttpServlet {
          }
          out.println("<br /><input type='submit' value='Search' />");
          out.println("</form>");
+         out.println("<form method='get' action='eshoporder'>");
+         out.println("<input type='hidden' name='action' value='purchase_cart' />");
+         out.println("<input type='submit' value='Purchase all books in cart' />");
+         out.println("</form>");
          
       } catch(SQLException ex) {
          out.println("<p>Error: " + ex.getMessage() + "</p>");

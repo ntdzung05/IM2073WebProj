@@ -6,10 +6,10 @@ import jakarta.servlet.annotation.*;
 
 @WebServlet("/register")
 public class EshopRegisterServlet extends HttpServlet {
-    
-    public void doPost(HttpServletRequest request,
-                          HttpServletResponse response)
-                          throws ServletException, IOException {
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+                    throws ServletException, IOException {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -21,31 +21,40 @@ public class EshopRegisterServlet extends HttpServlet {
         }
 
         password = SHA256Hasher.getSHA256Hash(password);
+        String role = request.getParameter("role");
 
         try (
-         Connection conn = DriverManager.getConnection(
-               "jdbc:mysql://localhost:3306/ebookshop?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
-               "myuser", "1234");
-         Statement stmt = conn.createStatement();
+            // Step 1: Allocate a database 'Connection' object
+            Connection conn = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/ebookshop?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
+                    "myuser", "1234");
         ) {
-            String sqlStr = "SELECT COUNT(*) AS rowcount FROM users WHERE username = '" + username + "'";
-            ResultSet rset = stmt.executeQuery(sqlStr);
-
-            rset.next();
-            int count = rset.getInt("rowcount");
-            if (count > 0) {
-                response.sendRedirect("ebookshopregister.html?error=1");
-                return;
+            // Step 2: Check whether username already exists
+            String checkSql = "SELECT COUNT(*) AS rowcount FROM users WHERE username = ?";
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkSql)) {
+                checkStmt.setString(1, username);
+                try (ResultSet rset = checkStmt.executeQuery()) {
+                    rset.next();
+                    int count = rset.getInt("rowcount");
+                    if (count > 0) {
+                        response.sendRedirect("ebookshopregister.html?error=1");
+                        return;
+                    }
+                }
             }
-            String role = request.getParameter("role");
 
-            sqlStr = "INSERT INTO users VALUES ('" + username + "', '" + password + "', '" + role + "')";
-            stmt.executeUpdate(sqlStr);
+            // Step 3: Insert new user account
+            String insertSql = "INSERT INTO users VALUES (?, ?, ?)";
+            try (PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
+                insertStmt.setString(1, username);
+                insertStmt.setString(2, password);
+                insertStmt.setString(3, role);
+                insertStmt.executeUpdate();
+            }
             response.sendRedirect("ebookshoplogin.html?success=1");
-        }
-        catch(SQLException ex) {
+        } catch(SQLException ex) {
             ex.printStackTrace();
             response.sendRedirect("ebookshopregister.html?error=3");
-        }
+        }  // Step 4: Close resources - Done automatically by try-with-resources (JDK 7)
     }
 }

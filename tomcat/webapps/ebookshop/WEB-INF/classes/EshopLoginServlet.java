@@ -3,6 +3,8 @@ import java.sql.*;
 import jakarta.servlet.*;            // Tomcat 10 (Jakarta EE 9)
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import java.util.List;
+import java.util.ArrayList;
 
 @WebServlet("/login")
 public class EshopLoginServlet extends HttpServlet {
@@ -29,6 +31,8 @@ public class EshopLoginServlet extends HttpServlet {
             if (rset.next()) {
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
+                List<Integer> cart = new ArrayList<>();
+                session.setAttribute("cart", cart);
                 response.sendRedirect("authorlist");
             } else {
                 response.sendRedirect("ebookshoplogin.html?error=1");

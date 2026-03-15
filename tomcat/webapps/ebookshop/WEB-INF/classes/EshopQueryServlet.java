@@ -70,15 +70,10 @@ public class EshopQueryServlet extends HttpServlet {
          }
          table = table + "</table>";
          out.println(table);
-         // get the customer's name, email and phone number
-         out.println("""
-            <p>Enter your Name: <input type='text' name='cust_name' /></p>
-            <p>Enter your Email: <input type='text' name='cust_email' /></p>
-            <p>Enter your Phone Number: <input type='text' name='cust_phone' /></p>
-         """);
-         
+
          // Print the submit button and </form> end-tag
          out.println("<p><input type='submit' value='ORDER' />");
+         out.println("<button type='submit' name='action' value='add_to_cart'>Add selected to cart and choose different authors</button>");
          out.println("</form>");
          // === Step 4 ends HERE - Do NOT delete the following codes ===
       } catch(SQLException ex) {
