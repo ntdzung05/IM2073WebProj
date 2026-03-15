@@ -74,7 +74,7 @@ public class EshopQueryServlet extends HttpServlet {
          out.println("""
             <p>Enter your Name: <input type='text' name='cust_name' /></p>
             <p>Enter your Email: <input type='text' placeholder='abcd@domain.com' name='cust_email' /></p>
-            <p>Enter your Phone Number: <input type='text' placeholder='6512345678' name='cust_phone' /></p>
+            <p>Enter your Phone Number: <input type='text' placeholder='12345678' name='cust_phone' /></p>
          """);
          
          // Print the submit button and </form> end-tag
