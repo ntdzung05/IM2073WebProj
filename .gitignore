@@ -1,0 +1,16 @@
+# build
+build/
+target/
+out/
+
+# compiled java
+*.class
+
+# logs
+*.log
+logs/
+
+# IDE
+.idea/
+.vscode/
+*.iml
