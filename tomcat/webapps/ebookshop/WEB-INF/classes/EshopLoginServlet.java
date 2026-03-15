@@ -29,7 +29,7 @@ public class EshopLoginServlet extends HttpServlet {
             if (rset.next()) {
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
-                response.sendRedirect("eshopquery.html");
+                response.sendRedirect("authorlist");
             } else {
                 response.sendRedirect("ebookshoplogin.html?error=1");
             }
