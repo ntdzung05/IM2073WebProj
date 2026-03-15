@@ -219,6 +219,7 @@
 14-Mar-2026 18:19:26.710 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-9999"]
 14-Mar-2026 18:19:26.741 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [2927] milliseconds
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 14-Mar-2026 18:55:30.508 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/11.0.18
 14-Mar-2026 18:55:30.511 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Jan 23 2026 10:22:57 UTC
 14-Mar-2026 18:55:30.512 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 11.0.18.0
@@ -288,4 +289,13 @@
 14-Mar-2026 18:35:58.289 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/ebookshop] has started
 14-Mar-2026 18:35:59.217 INFO [Catalina-utility-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
 14-Mar-2026 18:35:59.228 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/ebookshop] is completed
+>>>>>>> Stashed changes
+=======
+14-Mar-2026 18:35:58.289 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/ebookshop] has started
+14-Mar-2026 18:35:59.217 INFO [Catalina-utility-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Mar-2026 18:35:59.228 INFO [Catalina-utility-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/ebookshop] is completed
+14-Mar-2026 18:36:56.452 INFO [Thread-1] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-9999"]
+14-Mar-2026 18:36:56.466 INFO [Thread-1] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+14-Mar-2026 18:36:56.492 INFO [Thread-1] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-9999"]
+14-Mar-2026 18:36:56.501 INFO [Thread-1] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-9999"]
 >>>>>>> Stashed changes
