@@ -4,6 +4,8 @@ import jakarta.servlet.*;            // Tomcat 10 (Jakarta EE 9)
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import java.util.regex.Pattern;
+import java.util.List;
+import java.util.ArrayList;
 
 
 @WebServlet("/eshoporder")   // Configure the request URL for this servlet (Tomcat 7/Servlet 3.0 upwards)
@@ -13,6 +15,85 @@ public class EshopOrderServlet extends HttpServlet {
    @Override
    public void doPost(HttpServletRequest request, HttpServletResponse response)
                throws ServletException, IOException {
+      String action = request.getParameter("action");
+      String[] ids = request.getParameterValues("id");
+      HttpSession session = request.getSession();
+                  
+      if ("add_to_cart".equals(action)) {
+         @SuppressWarnings("unchecked")
+         List<Integer> cart = (List<Integer>) session.getAttribute("cart");
+         if (cart == null) {
+            cart = new ArrayList<>();
+            session.setAttribute("cart", cart);
+         }
+
+         if (ids != null) {
+            for (String id : ids) {
+               try {
+                  int bookId = Integer.parseInt(id);
+                  cart.add(bookId);
+               } catch (NumberFormatException ignore) {
+               }
+            }
+         }
+
+         response.sendRedirect("authorlist");
+         return;
+      }
+
+      if ("purchase_cart".equals(action) && (ids == null || ids.length == 0)) {
+         @SuppressWarnings("unchecked")
+         List<Integer> cart = (List<Integer>) session.getAttribute("cart");
+         if (cart != null && !cart.isEmpty()) {
+            ids = new String[cart.size()];
+            for (int i = 0; i < cart.size(); ++i) {
+               ids[i] = String.valueOf(cart.get(i));
+            }
+         }
+      }
+
+      String cust_name = request.getParameter("cust_name");
+      String cust_email = request.getParameter("cust_email");
+      String cust_phone = request.getParameter("cust_phone");
+
+      if (ids == null || ids.length == 0) {
+         response.setContentType("text/html");
+         PrintWriter out = response.getWriter();
+         out.println("<!DOCTYPE html>");
+         out.println("<html>");
+         out.println("<head><title>Order</title></head>");
+         out.println("<body>");
+         out.println("<h3>Please go back and select a book...</h3>");
+         out.println("</body></html>");
+         out.close();
+         return;
+      }
+
+      if (cust_name == null || cust_email == null || cust_phone == null) {
+         response.setContentType("text/html");
+         PrintWriter out = response.getWriter();
+         out.println("<!DOCTYPE html>");
+         out.println("<html>");
+         out.println("<head><title>Customer Details</title></head>");
+         out.println("<body>");
+         out.println("<h3>Please enter your details to confirm order</h3>");
+         out.println("<form method='get' action='eshoporder'>");
+         if (action != null) {
+            out.println("<input type='hidden' name='action' value='" + action + "' />");
+         }
+         for (String id : ids) {
+            out.println("<input type='hidden' name='id' value='" + id + "' />");
+         }
+         out.println("<p>Enter your Name: <input type='text' name='cust_name' required /></p>");
+         out.println("<p>Enter your Email: <input type='text' placeholder='abcd@domain.com' name='cust_email' required /></p>");
+         out.println("<p>Enter your Phone Number: <input type='text' placeholder='12345678' name='cust_phone' required /></p>");
+         out.println("<p><input type='submit' value='CONFIRM ORDER' /></p>");
+         out.println("</form>");
+         out.println("</body></html>");
+         out.close();
+         return;
+      }
+
       // Set the MIME type for the response message
       response.setContentType("text/html");
       // Get a output writer to write the response message into the network socket
@@ -35,13 +116,8 @@ public class EshopOrderServlet extends HttpServlet {
       ) {
          // Step 3 & 4: Execute a SQL SELECT query and Process the query result
          // Retrieve the books' id. Can order more than one books.
-         String[] ids = request.getParameterValues("id");
-         String cust_name = request.getParameter("cust_name");
-         String cust_email = request.getParameter("cust_email");
-         String cust_phone = request.getParameter("cust_phone");
-         
          if (ids != null) {
-            if (cust_name.isEmpty() && isValidEmail(cust_email) && cust_phone.length() == 8) {
+            if (true/*cust_name.isEmpty() && isValidEmail(cust_email) && cust_phone.length() == 8*/) {
                String sqlStr;
                int count;
    
@@ -61,6 +137,14 @@ public class EshopOrderServlet extends HttpServlet {
                   out.println("<p>" + count + " record inserted.</p>");
                   out.println("<h3>Your order for book id=" + ids[i]
                         + " has been confirmed.</h3>");
+               }
+
+               if ("purchase_cart".equals(action)) {
+                  @SuppressWarnings("unchecked")
+                  List<Integer> cart = (List<Integer>) session.getAttribute("cart");
+                  if (cart != null) {
+                     cart.clear();
+                  }
                }
                out.println("<h3>Thank you.<h3>");
             } else { //Incorrect email/phone input
