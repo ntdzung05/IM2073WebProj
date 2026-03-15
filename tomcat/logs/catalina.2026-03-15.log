@@ -1157,3 +1157,7 @@
 15-Mar-2026 23:42:31.218 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\bachc\IM2073WebProj\tomcat\webapps\ROOT] has finished in [222] ms
 15-Mar-2026 23:42:31.220 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-9999"]
 15-Mar-2026 23:42:31.245 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [2436] milliseconds
+15-Mar-2026 23:47:39.950 INFO [Thread-1] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-9999"]
+15-Mar-2026 23:47:39.954 INFO [Thread-1] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+15-Mar-2026 23:47:39.975 INFO [Thread-1] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-9999"]
+15-Mar-2026 23:47:39.986 INFO [Thread-1] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-9999"]
