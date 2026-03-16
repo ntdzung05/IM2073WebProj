@@ -132,16 +132,16 @@ public class EshopOrderServlet extends HttpServlet {
             for (int i = 0; i < ids.length; ++i) {
                // Update the qty of the table books
                sqlStr = "UPDATE books SET qty = qty - 1 WHERE id = " + ids[i];
-               out.println("<p>" + sqlStr + "</p>");  // for debugging
+               //out.println("<p>" + sqlStr + "</p>");  // for debugging
                count = stmt.executeUpdate(sqlStr);
-               out.println("<p>" + count + " record updated.</p>");
+               //out.println("<p>" + count + " record updated.</p>");
 
                // Create a transaction record
                sqlStr = "INSERT INTO order_records (id, qty_ordered, cust_name, cust_email, cust_phone) VALUES ("
                      + ids[i] + ", 1, '" + cust_name + "', '" + cust_email + "', '" + cust_phone + "')";
-               out.println("<p>" + sqlStr + "</p>");  // for debugging
+               //out.println("<p>" + sqlStr + "</p>");  // for debugging
                count = stmt.executeUpdate(sqlStr);
-               out.println("<p>" + count + " record inserted.</p>");
+               //out.println("<p>" + count + " record inserted.</p>");
                out.println("<h3>Your order for book id=" + ids[i]
                      + " has been confirmed.</h3>");
             }

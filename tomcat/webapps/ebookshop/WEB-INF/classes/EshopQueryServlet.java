@@ -47,7 +47,7 @@ public class EshopQueryServlet extends HttpServlet {
          // === Form the SQL command - END ===
 
          out.println("<h3>Thank you for your query.</h3>");
-         out.println("<p>Your SQL statement is: " + sqlStr + "</p>"); // Echo for debugging
+         //out.println("<p>Your SQL statement is: " + sqlStr + "</p>"); // Echo for debugging
          ResultSet rset = stmt.executeQuery(sqlStr);  // Send the query to the server
 
          // Step 4: Process the query result
