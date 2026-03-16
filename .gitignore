@@ -4,7 +4,6 @@ target/
 out/
 
 # compiled java
-*.class
 
 # logs
 *.log

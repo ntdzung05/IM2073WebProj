@@ -29,6 +29,16 @@ public class EshopLoginServlet extends HttpServlet {
             if (rset.next()) {
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+                List<Integer> cart = new ArrayList<>();
+                session.setAttribute("cart", cart);
+=======
+                List<Integer> Cart = new ArrayList<>();
+                session.setAttribute("cart", Cart);
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
                 response.sendRedirect("authorlist");
             } else {
                 response.sendRedirect("ebookshoplogin.html?error=1");

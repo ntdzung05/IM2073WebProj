@@ -122,3 +122,7 @@
 0:0:0:0:0:0:0:1 - - [15/Mar/2026:22:08:52 +0800] "GET /ebookshop/ebookshoplogin.html?error=1 HTTP/1.1" 304 -
 0:0:0:0:0:0:0:1 - - [15/Mar/2026:22:08:57 +0800] "POST /ebookshop/login HTTP/1.1" 302 -
 0:0:0:0:0:0:0:1 - - [15/Mar/2026:22:08:57 +0800] "GET /ebookshop/authorlist HTTP/1.1" 200 551
+0:0:0:0:0:0:0:1 - - [15/Mar/2026:22:27:04 +0800] "GET /ebookshop/eshopquery?author=Kevin+Jones HTTP/1.1" 200 836
+0:0:0:0:0:0:0:1 - - [15/Mar/2026:22:48:32 +0800] "GET /ebookshop/ HTTP/1.1" 200 2947
+0:0:0:0:0:0:0:1 - - [15/Mar/2026:22:48:37 +0800] "GET /ebookshop/eshopquery?author=Kumar HTTP/1.1" 200 819
+0:0:0:0:0:0:0:1 - - [15/Mar/2026:22:51:46 +0800] "GET /ebookshop/eshopquery?author=Tan+Ah+Teck&author=Mohammad+Ali HTTP/1.1" 200 1118
