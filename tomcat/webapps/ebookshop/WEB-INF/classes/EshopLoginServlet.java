@@ -35,11 +35,11 @@ public class EshopLoginServlet extends HttpServlet {
                 session.setAttribute("cart", cart);
                 response.sendRedirect("authorlist");
             } else {
-                response.sendRedirect("ebookshoplogin.html?error=1");
+                response.sendRedirect("index.html?error=1");
             }
         } catch(SQLException ex) {
          ex.printStackTrace();
-         response.sendRedirect("ebookshoplogin.html?error=2");
+         response.sendRedirect("index.html?error=2");
         }
     }
 }

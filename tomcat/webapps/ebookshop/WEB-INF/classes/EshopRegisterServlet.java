@@ -51,7 +51,7 @@ public class EshopRegisterServlet extends HttpServlet {
                 insertStmt.setString(3, role);
                 insertStmt.executeUpdate();
             }
-            response.sendRedirect("ebookshoplogin.html?success=1");
+            response.sendRedirect("index.html?success=1");
         } catch(SQLException ex) {
             ex.printStackTrace();
             response.sendRedirect("ebookshopregister.html?error=3");
